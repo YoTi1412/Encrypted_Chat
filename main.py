@@ -10,3 +10,10 @@ if choice == '1':
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server.bind(("192.168.1.6", 4444))
     server.listen()
+
+    client, _ = server.accept()
+elif choice == '2':
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect(("192.168.1.6"))
+else:
+    exit()
