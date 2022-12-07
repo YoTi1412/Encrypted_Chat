@@ -8,18 +8,20 @@ public_partner = None
 
 
 choice = input("Do you want to Host (1), or to connect (2): ")
-
+# USER or HOSTER
 if choice == '1':
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(("Your IP address here", 9999))
+    server.bind(("Your IP adress Here", 9999))
     server.listen()
 
     client, _ = server.accept()
     client.send(public_key.save_pkcs1("PEM"))
     public_partner = rsa.PublicKey.load_pkcs1(client.recv(1024))
+# PARTNER
+
 elif choice == '2':
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(("Partner IP address here", 9999))
+    client.connect(("Partner IP adress Here", 9999))
     public_partner = rsa.PublicKey.load_pkcs1(client.recv(1024))
     client.send(public_key.save_pkcs1("PEM"))
 
